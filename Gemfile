@@ -1,11 +1,14 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-ruby '2.1.3'
+# downgrade ruby because of furatto dependency issue
+ruby '2.0.0'
 
 gem 'rails', '4.1.8'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
+gem 'sass-rails'
+gem 'coffee-rails'
 
 #Api gems
 gem 'active_model_serializers'
@@ -27,3 +30,9 @@ group :test do
 end
 
 gem "devise"
+# instead of postman
+gem 'sabisu_rails', github: "IcaliaLabs/sabisu-rails"
+gem 'furatto', github: "IcaliaLabs/furatto-rails"
+gem 'compass-rails', github: "Compass/compass-rails", branch: "master"
+gem 'font-awesome-rails'
+gem 'simple_form'
