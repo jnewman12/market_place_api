@@ -42,4 +42,6 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   # to use the outdated should syntax instead of expect
   config.expect_with(:rspec) { |c| c.syntax = :should }
+  # adding json_response helper
+  config.include RequestHelper, :type => :controller
 end
