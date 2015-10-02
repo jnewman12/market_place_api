@@ -2,9 +2,10 @@ require 'rails_helper'
 
 # syntax change to a structure like github.com/jnewman12/rspec-example
 # comments are the newer expect syntax (which is the one recommended),
-# and the uncommented ones are the should syntax which was added in rails_helper.rb
+# and the uncommented ones are the should syntax which was enabled in rails_helper.rb
 describe Api::V1::UsersController do
-	before (:each) { request.headers['Accept'] = "application/vnd.marketplace.v1" }
+	before (:each) { request.headers['Accept'] = "application/vnd.marketplace.v1, #{Mime::JSON}" }
+	before(:each) { request.headers['Content-Type'] = Mime::JSON.to_s }
 
 	describe "GET #show" do 
 		before (:each) do 
