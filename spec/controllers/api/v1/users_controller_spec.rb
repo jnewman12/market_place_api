@@ -4,8 +4,12 @@ require 'rails_helper'
 # comments are the newer expect syntax (which is the one recommended),
 # and the uncommented ones are the should syntax which was enabled in rails_helper.rb
 describe Api::V1::UsersController do
-	before (:each) { request.headers['Accept'] = "application/vnd.marketplace.v1, #{Mime::JSON}" }
-	before(:each) { request.headers['Content-Type'] = Mime::JSON.to_s }
+	# before (:each) { request.headers['Accept'] = "application/vnd.marketplace.v1, #{Mime::JSON}" }
+	# before(:each) { request.headers['Content-Type'] = Mime::JSON.to_s }
+	before(:each) do
+	    request.headers['Accept'] = "application/vnd.marketplace.v1, #{Mime::JSON}"
+	    request.headers['Content-Type'] = Mime::JSON.to_s
+	end
 
 	describe "GET #show" do 
 		before (:each) do 
