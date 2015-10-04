@@ -44,4 +44,8 @@ RSpec.configure do |config|
   config.expect_with(:rspec) { |c| c.syntax = :should }
   # adding json_response helper
   config.include RequestHelper, :type => :controller
+
+  config.before(:each, type: :controller) do
+      include_default_accept_headers
+  end
 end
