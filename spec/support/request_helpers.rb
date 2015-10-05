@@ -12,6 +12,11 @@ module RequestHelper
 		request.headers['Content-Type'] = format.to_s
 	end
 
+	# this is so each time we need to call current_user in the specs, we can
+	def api_authorization_header(token)
+	  request.headers['Authorization'] = token 
+	end
+
 	def include_default_accept_headers
 		api_header
 		api_response_format
