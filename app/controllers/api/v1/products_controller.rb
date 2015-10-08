@@ -18,7 +18,11 @@ class Api::V1::ProductsController < ApplicationController
 	   else
 	     render json: { errors: product.errors }, status: 422
 	   end
-	 end
+	end
+
+	def update
+		product = current_user.products.update(product_params)
+	end
 
 	private
 	def product_params
