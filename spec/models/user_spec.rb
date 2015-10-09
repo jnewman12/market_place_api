@@ -11,7 +11,7 @@ RSpec.describe User, type: :model do
 	it { should respond_to(:email) }
 	it { should respond_to(:password) }
 	it { should respond_to(:password_confirmation) }
-
+	it { should have_many(:products) }
 	it { should be_valid }
 
 	# user validations
@@ -38,6 +38,23 @@ RSpec.describe User, type: :model do
 			# expect(@user.auth_token).not_to eql existing_user.auth_token
 			@user.auth_token.should_not eql existing_user.auth_token
 		end
+	end
+
+	describe "products association" do
+	   before do 
+	   	@user.save
+	   	# we saved 'user' in our factory so FG knows we're talking about an object
+	   	# as a result, user is a attr on product, so we just pass it
+	   	3.times { FactoryGirl.create :product, user: @user}
+	   end 
+	   it "destroys the associated products on '#Destroy'" do 
+	   	products = @user.products
+	   	@user.destroy
+	   	  products.each do |product|
+	   	  	# expect(Product.find(product)).to raise_error ActiveRecord::RecordNotFound
+	   	  	Product.find(product).should raise_error ActiveRecord::RecordNotFound
+	   	  end
+	   end
 	end
 
 end
