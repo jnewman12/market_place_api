@@ -8,7 +8,7 @@ describe Api::V1::ProductsController do
 		end
 
 		it "returns the product information of a certain id" do 
-			product_response = json_response
+			product_response = json_response[:product]
 			# expect(product_response[:title]).to eql @product.title
 			product_response[:title].should eql @product.title
 		end
@@ -40,7 +40,7 @@ describe Api::V1::ProductsController do
 	    end
 
 	    it "renders the json response for the product created" do
-	      product_response = json_response
+	      product_response = json_response[:product]
 	      # expect(product_response[:title]).to eql @product_attributes[:title]
 	      product_response[:title].should eql @product_attributes[:title]
 	    end
@@ -87,7 +87,7 @@ describe Api::V1::ProductsController do
 	    end 
 
 	    it "renders the json response for the product updated" do
-	      product_response = json_response
+	      product_response = json_response[:product]
 	      # expect(product_response[:title]).to eql "An expensive TV"
 	      product_response[:title].should eql "A Kind of TV"
 	    end
