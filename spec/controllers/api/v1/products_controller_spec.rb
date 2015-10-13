@@ -29,6 +29,8 @@ describe Api::V1::ProductsController do
 			get :index
 		end
 
+		# setting up to return the scoped product records
+
 		it "returns 4 unique products" do 
 			products_response = json_response
 			# expect(products_response[:products]).to have(4).items
