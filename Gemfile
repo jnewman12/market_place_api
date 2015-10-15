@@ -25,6 +25,8 @@ end
 group :development, :test do 
   gem "factory_girl_rails"
   gem 'ffaker'
+  gem 'pry'
+  gem 'byebug'
 end
 
 group :test do

@@ -1,4 +1,5 @@
 require 'rails_helper'
+#require 'spec_helper'
 
 describe Api::V1::ProductsController do
 	# describe "#GET show" do 
@@ -89,58 +90,58 @@ describe Api::V1::ProductsController do
 	#   end
 	# end
 
-	# describe "PUT/PATCH #update" do
+	describe "PUT/PATCH #update" do
+		#debugger
+	  before(:each) do 
+	  	@user = FactoryGirl.create :user 
+	  	@product = FactoryGirl.create :product, user_id: @user.id 
+	  	api_authorization_header @user.auth_token
+	  end 
 
-	#   before(:each) do 
-	#   	@user = FactoryGirl.create :user 
-	#   	@product = FactoryGirl.create :product, user_id: @user.id 
-	#   	api_authorization_header(@user.auth_token)
-	#   end 
+	  context "when a product is successfully updated" do
+	    before(:each) do 
+	    	patch :update, { user_id: @user.id, id: @product.id,
+	    	product: { title: "A Kind of TV" } }
+	    end 
 
-	#   context "when a product is successfully updated" do
-	#     before(:each) do 
-	#     	patch :update, { user_id: @user.id, id: @product.id,
-	#     	product: { title: "A Kind of TV" } }
-	#     end 
+	    it "renders the json response for the product updated" do
+	      product_response = json_response[:product]
+	      # expect(product_response[:title]).to eql "An expensive TV"
+	      product_response[:title].should eql "A Kind of TV"
+	    end
 
-	#     it "renders the json response for the product updated" do
-	#       product_response = json_response[:product]
-	#       # expect(product_response[:title]).to eql "An expensive TV"
-	#       product_response[:title].should eql "A Kind of TV"
-	#     end
+	    it { should respond_with 200 }
+	  end
 
-	#     it { should respond_with 200 }
-	#   end
+	  context "when a product is not successfully updated" do 
+	  	before(:each) do 
+	  		patch :update, { user_id: @user.id, id: @product.id,
+	  		product: { price: "A Kind of thing" } }
+	  	end
 
-	#   context "when a product is not successfully updated" do 
-	#   	before(:each) do 
-	#   		patch :update, { user_id: @user.id, id: @product.id,
-	#   		product: { price: "A Kind of thing" } }
-	#   	end
+	  	it "renders a json error" do 
+	  	  product_response = json_response
+	  	  # expect(product_response).to have_key(:errors)
+	  	  product_response.should have_key(:errors)	
+	  	end
 
-	#   	it "renders a json error" do 
-	#   	  product_response = json_response
-	#   	  # expect(product_response).to have_key(:errors)
-	#   	  product_response.should have_key(:errors)	
-	#   	end
+	  	it "renders a json error explaining why" do 
+	  	  product_response = json_response
+	  	  # expect(product_response[:errors][:price]).to include "is not a number"
+	  	  product_response[:errors][:price].should include "is not a number"
+	  	end
 
-	#   	it "renders a json error explaining why" do 
-	#   	  product_response = json_response
-	#   	  # expect(product_response[:errors][:price]).to include "is not a number"
-	#   	  product_response[:errors][:price].should include "is not a number"
-	#   	end
+	  	it { should respond_with 422 }
+ 	  end
+	end
 
-	#   	it { should respond_with 422 }
- # 	  end
-	# end
-
-	# describe "DELETE #destroy" do 
-	# 	before(:each) do
-	#       @user = FactoryGirl.create :user
-	#       @product = FactoryGirl.create :product, user: @user
-	#       api_authorization_header @user.auth_token
-	#       delete :destroy, { user_id: @user.id, id: @product.id }
-	# 	end
-	# 	it { should respond_with 204 }
-	# end
+	describe "DELETE #destroy" do 
+		before(:each) do
+	      @user = FactoryGirl.create :user
+	      @product = FactoryGirl.create :product, user: @user
+	      api_authorization_header @user.auth_token
+	      delete :destroy, { user_id: @user.id, id: @product.id }
+		end
+		it { should respond_with 204 }
+	end
 end
