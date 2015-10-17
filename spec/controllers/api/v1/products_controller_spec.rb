@@ -23,30 +23,30 @@ describe Api::V1::ProductsController, :controller => true do
 	# 	it { should respond_with 200 }
 	# end
 
-	# describe "#GET index" do 
-	# 	# added collection matchers (have(4)) gem, was core now a gem
-	# 	before(:each) do 
-	# 		4.times { FactoryGirl.create :product }
-	# 		get :index
-	# 	end
+	describe "#GET index" do 
+		# added collection matchers (have(4)) gem, was core now a gem
+		before(:each) do 
+			4.times { FactoryGirl.create :product }
+			get :index
+		end
 
-	# 	# setting up to return the scoped product records
+		# setting up to return the scoped product records
 
-	# 	it "returns 4 unique products" do 
-	# 		products_response = json_response
-	# 		# expect(products_response[:products]).to have(4).items
-	# 		products_response[:products].should have(4).items
-	# 	end
+		it "returns 4 unique products" do 
+			products_response = json_response
+			# expect(products_response[:products]).to have(4).items
+			products_response[:products].should have(4).items
+		end
 
-	# 	it "returns the user object into each product" do 
-	# 		products_response = json_response[:products]
-	# 		products_response.each do |product_response|
-	# 		  # expect(product_response[:user]).to be_present
-	# 		  product_response[:user].should be_present
-	# 		end
-	# 	end
-	# 	it { should respond_with 200 }
-	# end
+		it "returns the user object into each product" do 
+			products_response = json_response[:products]
+			products_response.each do |product_response|
+			  # expect(product_response[:user]).to be_present
+			  product_response[:user].should be_present
+			end
+		end
+		it { should respond_with 200 }
+	end
 	
 	describe "POST #create" do
 	  context "when it is successfully created" do
