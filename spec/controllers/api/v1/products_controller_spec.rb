@@ -1,5 +1,7 @@
 require 'rails_helper'
 #require 'spec_helper'
+#require_relative '../../../support/request_helpers'
+
 
 describe Api::V1::ProductsController, :controller => true do
 	describe "#GET show" do 

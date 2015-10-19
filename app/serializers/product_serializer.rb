@@ -1,5 +1,5 @@
 class ProductSerializer < ActiveModel::Serializer
- 	attributes :id, :title, :price, :published
+ 	attributes :id, :title, :published
  	has_one :user
 
  	def cache_key

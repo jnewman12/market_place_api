@@ -20,6 +20,7 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  config.include RequestHelper, :type => :controller
   config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!
 
@@ -27,9 +28,6 @@ RSpec.configure do |config|
 
   # to use the outdated should syntax instead of expect
   config.expect_with(:rspec) { |c| c.syntax = :should }
-
-  # adding json_response helper
-  config.include RequestHelper, :type => :controller
 
   # call our RequestHelper module method before each controller run
   config.before(:each, type: :controller) do
