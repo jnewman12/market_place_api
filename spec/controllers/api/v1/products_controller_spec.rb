@@ -1,6 +1,4 @@
 require 'rails_helper'
-#require 'spec_helper'
-#require_relative '../../../support/request_helpers'
 
 
 describe Api::V1::ProductsController, :controller => true do
@@ -35,13 +33,15 @@ describe Api::V1::ProductsController, :controller => true do
 		# setting up to return the scoped product records
 
 		it "returns 4 unique products" do 
-			products_response = json_response
+			#p json_response
+			#products_response = json_response
 			# expect(products_response[:products]).to have(4).items
-			products_response[:products].should have(4).items
+			json_response[:products].should have(4).items
 		end
 
 		it "returns the user object into each product" do 
 			products_response = json_response[:products]
+			p products_response
 			products_response.each do |product_response|
 			  # expect(product_response[:user]).to be_present
 			  product_response[:user].should be_present
