@@ -3,7 +3,7 @@ class ProductSerializer < ActiveModel::Serializer
  	attributes :user
 
  	def cache_key
-		[object, scope]
+	  [object, scope]
 	end
 
 	# because ActiveModel::Serializer is bullshit. this fixed the infinite loop error

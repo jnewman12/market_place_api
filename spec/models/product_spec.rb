@@ -19,4 +19,7 @@ describe Product do
 
 	# testing the belongs_to
 	it { should belong_to(:user) }
+
+	describe ".filter_by_title" do 
+	end
 end
