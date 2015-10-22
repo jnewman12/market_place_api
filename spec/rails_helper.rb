@@ -28,7 +28,6 @@ RSpec.configure do |config|
   # to use the outdated should syntax instead of expect
   config.expect_with(:rspec) { |c| c.syntax = :should }
 
-  # adding json_response helper
   config.include RequestHelper, :type => :controller
 
   # call our RequestHelper module method before each controller run

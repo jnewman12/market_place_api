@@ -25,6 +25,8 @@ end
 group :development, :test do 
   gem "factory_girl_rails"
   gem 'ffaker'
+  gem 'pry'
+  gem 'byebug'
 end
 
 group :test do
@@ -34,7 +36,7 @@ group :test do
 end
 
 gem "devise"
-# instead of postman
+# instead of postman (only for examining endpoints, and needs SASS + CoffeeScript as dependencies. Not worth it imo)
 gem 'sabisu_rails', github: "IcaliaLabs/sabisu-rails"
 gem 'furatto', github: "IcaliaLabs/furatto-rails"
 gem 'compass-rails', github: "Compass/compass-rails", branch: "master"

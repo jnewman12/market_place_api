@@ -1,6 +1,7 @@
 require 'rails_helper'
 
-describe Api::V1::ProductsController do
+
+describe Api::V1::ProductsController, :controller => true do
 	describe "#GET show" do 
 		before(:each) do 
 			@product = FactoryGirl.create :product
@@ -8,9 +9,16 @@ describe Api::V1::ProductsController do
 		end
 
 		it "returns the product information of a certain id" do 
-			product_response = json_response
+			product_response = json_response[:product]
 			# expect(product_response[:title]).to eql @product.title
 			product_response[:title].should eql @product.title
+		end
+
+		it "has a user as an embedded object" do 
+			product_response = json_response[:product]
+			# expect(product_response[:user][:email]).to eql @product.user.email
+			product_response[:user][:email].should eql @product.user.email
+
 		end
 		it { should respond_with 200 }
 	end
@@ -22,10 +30,22 @@ describe Api::V1::ProductsController do
 			get :index
 		end
 
+		# setting up to return the scoped product records
+
 		it "returns 4 unique products" do 
-			products_response = json_response
+			#p json_response
+			#products_response = json_response
 			# expect(products_response[:products]).to have(4).items
-			products_response[:products].should have(4).items
+			json_response[:products].should have(4).items
+		end
+
+		it "returns the user object into each product" do 
+			products_response = json_response[:products]
+			p products_response
+			products_response.each do |product_response|
+			  # expect(product_response[:user]).to be_present
+			  product_response[:user].should be_present
+			end
 		end
 		it { should respond_with 200 }
 	end
@@ -40,7 +60,7 @@ describe Api::V1::ProductsController do
 	    end
 
 	    it "renders the json response for the product created" do
-	      product_response = json_response
+	      product_response = json_response[:product]
 	      # expect(product_response[:title]).to eql @product_attributes[:title]
 	      product_response[:title].should eql @product_attributes[:title]
 	    end
@@ -73,11 +93,11 @@ describe Api::V1::ProductsController do
 	end
 
 	describe "PUT/PATCH #update" do
-
+		#debugger
 	  before(:each) do 
 	  	@user = FactoryGirl.create :user 
 	  	@product = FactoryGirl.create :product, user_id: @user.id 
-	  	api_authorization_header(@user.auth_token)
+	  	api_authorization_header @user.auth_token
 	  end 
 
 	  context "when a product is successfully updated" do
@@ -87,7 +107,7 @@ describe Api::V1::ProductsController do
 	    end 
 
 	    it "renders the json response for the product updated" do
-	      product_response = json_response
+	      product_response = json_response[:product]
 	      # expect(product_response[:title]).to eql "An expensive TV"
 	      product_response[:title].should eql "A Kind of TV"
 	    end
@@ -116,6 +136,8 @@ describe Api::V1::ProductsController do
 	  	it { should respond_with 422 }
  	  end
 	end
+
+	
 
 	describe "DELETE #destroy" do 
 		before(:each) do

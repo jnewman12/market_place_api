@@ -1,13 +1,13 @@
 class Api::V1::ProductsController < ApplicationController
-	respond_to :json
 	before_action :authenticate_with_token!, only: [:create, :update, :destroy]
+	respond_to :json
 
 	def show
 	  respond_with Product.find(params[:id])
 	end
 
 	def index
-	  respond_with Product.all
+	  respond_with Product.search(params)
 	end
 
 	def create
