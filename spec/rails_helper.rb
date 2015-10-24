@@ -4,6 +4,7 @@ require 'spec_helper'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/collection_matchers'
+require 'email_spec'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -29,6 +30,9 @@ RSpec.configure do |config|
   config.expect_with(:rspec) { |c| c.syntax = :should }
 
   config.include RequestHelper, :type => :controller
+
+  config.include(EmailSpec::Helpers)
+  config.include(EmailSpec::Matchers)
 
   # call our RequestHelper module method before each controller run
   config.before(:each, type: :controller) do
