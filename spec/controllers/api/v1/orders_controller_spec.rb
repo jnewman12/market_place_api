@@ -18,22 +18,27 @@ describe Api::V1::OrdersController, type: :controller do
 		it { should respond_with 200 }
 	end
 
-	describe "POST #Create" do 
+	describe "Post #create" do 
 	  before(:each) do 
 	  	current_user = FactoryGirl.create :user 
 	  	api_authorization_header(current_user.auth_token)
 
-	  	product_1 = FactoryGirl.create :product
+	  	product_1 = FactoryGirl.create :product 
 	  	product_2 = FactoryGirl.create :product
-
-	  	order_params = { product_ids: [product_1.id, product_2.id] }
-	  	post :create, user_id: current_user.id, order: order_params
+	  	order_params = { product_ids_and_quantities: [ [product_1.id, 2], [product_2.id, 3] ] }
+	  	post :create, user_id: current_user, order: order_params
 	  end	
 
-	  it "returns just the user record" do 
-	  	order_response = json_response[:order] 
-	  	# expect(order_response[:id]).to be_present 
+	  it "returns just the order record" do 
+	  	order_response = json_response[:order]
+	  	# expect(order_response[:id]).to be_present
 	  	order_response[:id].should be_present
+	  end
+
+	  it "embeds the two product objects related to the order" do 
+	  	order_response = json_response[:order]
+	  	# expect(order_response[:products].size).to eql 2
+	  	order_response[:product_ids].size.should eql 2
 	  end
 
 	  it { should respond_with 201 }
