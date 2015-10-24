@@ -7,6 +7,7 @@ class Api::V1::OrdersController < ApplicationController
 	end
 
 	def show
+	 respond_with current_user.orders.find(params[:id])
 	end
 
 	def create
