@@ -18,7 +18,7 @@ class Order < ActiveRecord::Base
   def build_placements_with_product_ids_and_quantities(product_ids_and_quantities) 
    	product_ids_and_quantities.each do |product_id_and_quantity| # [[1,5],[2,3]]
    	  id, quantity = product_id_and_quantity # [1,5]
-   	  self.placements.build(product_id: id) # telling the db the product_id is the first value of the current array
+   	  self.placements.build(product_id: id, quantity: quantity) # telling the db the product_id is the first value of the current array
    	end
   end
 end
