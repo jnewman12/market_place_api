@@ -57,7 +57,7 @@ RSpec.describe User, type: :model do
 	   	  	# expect(Product.find(product)).to raise_error ActiveRecord::RecordNotFound
 	   	  	Product.find(product).should raise_error ActiveRecord::RecordNotFound
 	   	  end
-	   end
+	    end
 	end
 
 end

@@ -8,6 +8,8 @@ class Order < ActiveRecord::Base
 
   before_validation :set_total!
 
+  validates_with EnoughProductsValidator
+
   def set_total!
     self.total = products.map(&:price).sum
   end
