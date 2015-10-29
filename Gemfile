@@ -9,6 +9,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'sass-rails'
 gem 'coffee-rails'
+gem 'kaminari'
 
 #Api gems
 gem 'active_model_serializers'
