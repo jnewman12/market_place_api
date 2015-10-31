@@ -41,19 +41,35 @@ describe Api::V1::ProductsController, :controller => true do
 
 		it "returns the user object into each product" do 
 			products_response = json_response[:products]
-			p products_response
+			# p products_response
 			products_response.each do |product_response|
 			  # expect(product_response[:user]).to be_present
 			  product_response[:user].should be_present
 			end
 		end
-		it { expect(json_response).to have_key(:meta) }
-        it { expect(json_response[:meta]).to have_key(:pagination) }
-        it { expect(json_response[:meta][:pagination]).to have_key(:per_page) }
-        it { expect(json_response[:meta][:pagination]).to have_key(:total_pages) }
-        it { expect(json_response[:meta][:pagination]).to have_key(:total_objects) }
+		it { json_response.should have_key(:meta) }
+        it { json_response[:meta].should have_key(:pagination) }
+        it { json_response[:meta][:pagination].should have_key(:per_page) }
+        it { json_response[:meta][:pagination].should have_key(:total_pages) }
+        it { json_response[:meta][:pagination].should have_key(:total_objects) }
 
         it { should respond_with 200 }
+
+        context "when product_ids parameter is sent" do
+          before(:each) do
+            @user = FactoryGirl.create :user
+            3.times { FactoryGirl.create :product, user: @user }
+            get :index, product_ids: @user.product_ids
+          end
+
+          it "returns just the products that belong to the user" do
+            products_response = json_response[:products]
+            products_response.each do |product_response|
+              # expect(product_response[:user][:email]).to eql @user.email
+              product_response[:user][:email].should eql @user.email
+            end
+          end
+        end
 	end
 	
 	describe "POST #create" do
