@@ -15,6 +15,8 @@ describe Api::V1::OrdersController, type: :controller do
 		  order_response.should have(4).items
 		end
 
+		it_behaves_like "paginated list"
+
 		it { should respond_with 200 }
 	end
 

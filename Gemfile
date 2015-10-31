@@ -9,6 +9,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'sass-rails'
 gem 'coffee-rails'
+gem 'kaminari'
+gem 'delayed_job_active_record'
 
 #Api gems
 gem 'active_model_serializers'
