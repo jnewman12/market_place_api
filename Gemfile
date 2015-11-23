@@ -46,4 +46,7 @@ gem 'compass-rails', github: "Compass/compass-rails", branch: "master"
 gem 'font-awesome-rails'
 gem 'simple_form'
 
-gem 'rails_12factor', group: :production
+group :production do 
+  gem 'rails_12factor'
+  gem 'pg'
+end
