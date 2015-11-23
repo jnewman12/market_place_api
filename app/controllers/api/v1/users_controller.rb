@@ -1,5 +1,6 @@
 class Api::V1::UsersController < ApplicationController
 	before_action :authenticate_with_token!, only: [:update, :destroy]
+	before_filter :cors_support
 	respond_to :json
 
 	def show

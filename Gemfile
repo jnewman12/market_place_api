@@ -11,6 +11,7 @@ gem 'sass-rails'
 gem 'coffee-rails'
 gem 'kaminari'
 gem 'delayed_job_active_record'
+gem 'angular_rails_csrf'
 
 #Api gems
 gem 'active_model_serializers'

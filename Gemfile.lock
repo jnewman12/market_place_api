@@ -56,6 +56,8 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     addressable (2.3.8)
+    angular_rails_csrf (1.0.4)
+      rails (>= 3, < 5)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.10)
     builder (3.2.2)
@@ -227,6 +229,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  angular_rails_csrf
   byebug
   coffee-rails
   compass-rails!
