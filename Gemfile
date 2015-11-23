@@ -12,6 +12,7 @@ gem 'coffee-rails'
 gem 'kaminari'
 gem 'delayed_job_active_record'
 gem 'angular_rails_csrf'
+gem 'rack-cors', :require => 'rack/cors'
 
 #Api gems
 gem 'active_model_serializers'
