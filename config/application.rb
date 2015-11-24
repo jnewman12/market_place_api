@@ -10,6 +10,7 @@ require "action_mailer/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
+require 'rack/cors'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -45,21 +46,15 @@ module MarketPlaceApi
     config.autoload_paths += %W(\#{config.root}/lib)
 
     # for cors. dont think it's doing anything, but I'm going to leave it for now. 
-    # config.middleware.insert_before 0, "Rack::Cors", :debug => true, :logger => (-> { Rails.logger }) do
-    #       allow do
-    #         origins '*'
-
-    #         resource '/cors',
-    #           :headers => :any,
-    #           :methods => [:post],
-    #           :credentials => true,
-    #           :max_age => 0
-
-    #         resource '*',
-    #           :headers => :any,
-    #           :methods => [:get, :post, :delete, :put, :patch, :options, :head],
-    #           :max_age => 0
-    #       end
-    #     end
+  # config.middleware.use Rack::Cors do
+  config.middleware.insert_before ActionDispatch::Static, Rack::Cors do  
+ # allow all origins in development
+       allow do
+         origins '*'
+         resource '*', 
+             :headers => :any, 
+             :methods => [:get, :post, :delete, :put, :options]
+       end
+     end
   end
 end
