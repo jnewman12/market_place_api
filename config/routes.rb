@@ -14,7 +14,6 @@ Rails.application.routes.draw do
         end
         resources :sessions, :only => [:create, :destroy]   
         resources :products, :only => [:show, :index]	
-        #get '*path', :controller => 'application', :action => 'empty', :constraints => {:method => "OPTIONS"}
     end
   end
 end

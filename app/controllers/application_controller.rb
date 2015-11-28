@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_filter :cors_preflight_check
   after_filter :cors_set_access_control_headers
 
+  # ability to access server from different port
   def cors_set_access_control_headers
     headers['Access-Control-Allow-Origin'] = '*'
     headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, DELETE, OPTIONS'
@@ -22,10 +23,6 @@ class ApplicationController < ActionController::Base
       render :text => '', :content_type => 'text/plain'
     end
   end
-
- # def empty
- #   render nothing: true
- # end
 
   protected 
   def pagination(paginated_array, per_page)
