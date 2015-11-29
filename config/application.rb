@@ -44,17 +44,13 @@ module MarketPlaceApi
     end
 
     config.autoload_paths += %W(\#{config.root}/lib)
-
-    # for cors. dont think it's doing anything, but I'm going to leave it for now. 
-  # config.middleware.use Rack::Cors do
-  config.middleware.insert_before ActionDispatch::Static, Rack::Cors do  
- # allow all origins in development
-       allow do
+    config.middleware.insert_before ActionDispatch::Static, Rack::Cors do  
+        allow do
          origins '*'
          resource '*', 
              :headers => :any, 
              :methods => [:get, :post, :delete, :put, :options]
-       end
-     end
+        end
+    end
   end
 end
