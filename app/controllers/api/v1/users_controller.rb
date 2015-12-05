@@ -1,7 +1,6 @@
 class Api::V1::UsersController < ApplicationController
 	before_action :authenticate_with_token!, only: [:update, :destroy]
 	respond_to :json
-	before_filer :cors_preflight_check
 
 	def show
 	  respond_with @user = User.find(params[:id])
