@@ -44,6 +44,7 @@ module MarketPlaceApi
     end
 
     config.autoload_paths += %W(\#{config.root}/lib)
+    
     config.middleware.insert_before ActionDispatch::Static, Rack::Cors do  
         allow do
          origins '*'
