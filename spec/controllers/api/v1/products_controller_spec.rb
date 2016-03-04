@@ -95,7 +95,7 @@ describe Api::V1::ProductsController, :controller => true do
 	      post :create, { user_id: user.id, product: @invalid_product_attributes }
 	    end
 
-	    it "renders an errors json" do
+	    it "renders json errors" do
 	      product_response = json_response
 	      # expect(product_response).to have_key(:errors)
 	      product_response.should have_key(:errors)
