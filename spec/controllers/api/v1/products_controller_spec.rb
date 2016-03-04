@@ -160,10 +160,10 @@ describe Api::V1::ProductsController, :controller => true do
 
 	describe "DELETE #destroy" do 
 		before(:each) do
-	      @user = FactoryGirl.create :user
-	      @product = FactoryGirl.create :product, user: @user
-	      api_authorization_header @user.auth_token
-	      delete :destroy, { user_id: @user.id, id: @product.id }
+      @user = FactoryGirl.create :user
+      @product = FactoryGirl.create :product, user: @user
+      api_authorization_header @user.auth_token
+      delete :destroy, { user_id: @user.id, id: @product.id }
 		end
 		it { should respond_with 204 }
 	end
