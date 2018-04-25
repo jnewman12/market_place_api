@@ -30,7 +30,7 @@ class Api::V1::ProductsController < ApplicationController
 	end
 
 	def destroy
-	  product = current_user.products.find(params[:id])
+	  product = current_user.products.find(params[:id])x
 	  product.destroy
 	  head 204
 	end

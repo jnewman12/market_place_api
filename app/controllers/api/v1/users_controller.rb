@@ -12,7 +12,7 @@ class Api::V1::UsersController < ApplicationController
 			render json: user, status: 201, location: [:api, user]
 		else
 			render json: { errors: user.errors }, status: 422
-	    end 
+	  end
 	end
 
 	def update

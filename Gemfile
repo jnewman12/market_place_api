@@ -1,8 +1,8 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 # downgrade ruby because of furatto dependency issue
-ruby '2.0.0'
+ruby '2.2.3'
 
 gem 'rails', '4.1.8'
 gem 'uglifier', '>= 1.3.0'
@@ -26,7 +26,7 @@ group :development do
   gem 'sqlite3'
 end
 
-group :development, :test do 
+group :development, :test do
   gem "factory_girl_rails"
   gem 'ffaker'
   gem 'pry'
@@ -48,7 +48,7 @@ gem 'compass-rails', github: "Compass/compass-rails", branch: "master"
 gem 'font-awesome-rails'
 gem 'simple_form'
 
-group :production do 
+group :production do
   gem 'rails_12factor'
   gem 'pg'
 end
